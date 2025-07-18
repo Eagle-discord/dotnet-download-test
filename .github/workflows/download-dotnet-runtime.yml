@@ -1,0 +1,18 @@
+name: Download .NET 8.0.16 Runtime
+
+on:
+  workflow_dispatch:
+
+jobs:
+  download:
+    runs-on: windows-latest
+    steps:
+      - name: Download .NET 8.0.16 Runtime
+        run: |
+          Invoke-WebRequest -Uri "https://download.visualstudio.microsoft.com/download/pr/178c798e-76ff-4a53-8647-1b12378cb8fe/9a7fa06efb27fc93e49da0fa7792feec/dotnet-runtime-8.0.16-win-x64.zip" -OutFile "dotnet-runtime-8.0.16-win-x64.zip"
+      
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dotnet-runtime-8.0.16-offline
+          path: dotnet-runtime-8.0.16-win-x64.zip
